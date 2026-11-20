@@ -1,103 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b1020">
-  <meta name="description" content="DreamMotion AI — turn still images into cinematic motion.">
-  <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icons/icon-192.png">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d1c">
   <title>DreamMotion AI</title>
+  <link rel="manifest" href="./manifest.webmanifest">
   <style>
-    :root{color-scheme:dark;--bg:#090d1a;--panel:#11182b;--panel2:#18213a;--line:#293451;--muted:#9ba8c7;--text:#f5f7ff;--violet:#8b6cff;--cyan:#4dd9e8}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#292052 0,transparent 42%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
-    .wrap{max-width:760px;margin:auto;padding:20px 16px 44px}.top{display:flex;align-items:center;justify-content:space-between;margin:8px 0 28px}.brand{display:flex;gap:11px;align-items:center;font-weight:800;font-size:19px;letter-spacing:-.5px}.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--violet),#4dcce2);display:grid;place-items:center;box-shadow:0 8px 30px #795cff55}.logo svg{width:23px}
-    .pill{border:1px solid #344064;border-radius:99px;padding:7px 11px;color:#b9c4e4;font-size:11px;letter-spacing:.8px;text-transform:uppercase}
-    h1{font-size:clamp(30px,7vw,48px);line-height:1.04;letter-spacing:-1.8px;margin:0 0 12px;max-width:600px}.gradient{background:linear-gradient(90deg,#bbaaff,#6ee7f1);-webkit-background-clip:text;background-clip:text;color:transparent}.intro{color:var(--muted);line-height:1.6;margin:0 0 24px;font-size:14px}
-    .card{background:linear-gradient(180deg,#151d33,#101729);border:1px solid var(--line);border-radius:22px;padding:17px;margin:14px 0;box-shadow:0 18px 50px #0002}.label{display:block;font-size:13px;font-weight:700;margin:0 0 11px}.drop{border:1.5px dashed #53618a;border-radius:17px;min-height:190px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;background:#0c1325;position:relative;overflow:hidden}.drop.has-image{padding:0;border-style:solid}.drop img{width:100%;max-height:360px;object-fit:contain;display:block}.drop-content{max-width:260px}.upload-icon{width:46px;height:46px;border-radius:15px;background:#252044;color:#c7baff;display:grid;place-items:center;margin:0 auto 12px}.drop p{margin:6px 0;color:var(--muted);font-size:12px}.smallbtn{display:inline-block;margin-top:10px;background:#28234a;color:#e5ddff;border:1px solid #6253a2;padding:9px 14px;border-radius:10px;font-size:12px;font-weight:700}
-    input[type=file]{display:none}.field{width:100%;border:1px solid #34415f;background:#0c1325;color:var(--text);border-radius:13px;padding:13px;font:inherit;font-size:14px;outline:none}.field:focus{border-color:#8b6cff;box-shadow:0 0 0 3px #8b6cff22}textarea.field{resize:vertical;min-height:90px;line-height:1.5}.hint{font-size:11px;color:var(--muted);margin:8px 2px 0;line-height:1.5}
-    .styles{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.style{border:1px solid #34415f;background:#0c1325;color:#dce4ff;border-radius:13px;padding:12px;text-align:left;font:inherit;font-size:13px;cursor:pointer}.style b{display:block;font-size:13px;margin-bottom:4px}.style span{font-size:11px;color:var(--muted)}.style.active{border-color:#9a83ff;background:#28234a;box-shadow:inset 0 0 0 1px #9a83ff}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary{width:100%;border:0;border-radius:15px;padding:16px;background:linear-gradient(100deg,#8868ff,#4bbfdc);color:white;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 12px 30px #6956e644}.primary:active{transform:scale(.99)}.secondary{border:1px solid #34415f;background:#151d33;color:#dce4ff;border-radius:12px;padding:11px 13px;font-weight:700}
-    .notice{display:none;margin-top:13px;padding:13px;border-radius:13px;background:#2b2416;border:1px solid #725a2d;color:#ffe4a6;font-size:12px;line-height:1.55}.notice.show{display:block}.foot{text-align:center;color:#7784a5;font-size:11px;line-height:1.6;margin:24px 8px 0}.install{display:none}.install.show{display:inline-block}
-    @media(min-width:620px){.wrap{padding:30px 24px 50px}.card{padding:22px}.styles{grid-template-columns:repeat(4,1fr)}}
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      background: #090d1c;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .app { max-width: 520px; margin: auto; }
+    header { text-align: center; padding: 22px 0; }
+    header h1 { color: #a78bfa; font-size: 30px; margin: 0 0 8px; }
+    header p { color: #aab2ca; }
+    .panel {
+      background: #151c32;
+      border: 1px solid #293452;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    label { display: block; margin: 15px 0 9px; font-weight: bold; }
+    input, textarea, select {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #394565;
+      background: #0d1428;
+      color: white;
+      font-size: 15px;
+    }
+    textarea { min-height: 90px; resize: vertical; }
+    button {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #7c3aed, #2563eb);
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 16px;
+      cursor: pointer;
+    }
+    button:disabled { opacity: .5; }
+    #preview {
+      display: none;
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 12px;
+    }
+    #message { color: #c4b5fd; text-align: center; line-height: 1.6; }
+    .small { color: #9ca8c5; font-size: 13px; text-align: center; }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M12 2.8 14.5 9.5 21.2 12 14.5 14.5 12 21.2 9.5 14.5 2.8 12 9.5 9.5 12 2.8Z"/><path d="m19 2 .8 2.2L22 5l-2.2.8L19 8l-.8-2.2L16 5l2.2-.8L19 2Z"/></svg></div>DreamMotion <span class="gradient">AI</span></div>
-    <div><span class="pill">Creative Studio</span><button id="installBtn" class="secondary install" style="margin-left:6px">Install</button></div>
-  </header>
-  <main>
-    <h1>Make your photos <span class="gradient">move.</span></h1>
-    <p class="intro">একটি ছবি বেছে নিন, আপনার কল্পনার নির্দেশনা লিখুন, আর তৈরি করুন সিনেমাটিক ভিডিওর পরিকল্পনা।</p>
+  <main class="app">
+    <header>
+      <h1>✨ DreamMotion AI</h1>
+      <p>Turn Your Images Into Videos</p>
+    </header>
 
-    <section class="card">
-      <label class="label" for="imageInput">১. আপনার ছবি যোগ করুন</label>
-      <div class="drop" id="dropArea">
-        <div class="drop-content" id="dropContent">
-          <div class="upload-icon">＋</div>
-          <strong>ছবি এখানে বেছে নিন</strong>
-          <p>JPG, PNG বা WebP · আপনার ফোন থেকে</p>
-          <label class="smallbtn" for="imageInput">Choose image</label>
-        </div>
-      </div>
-      <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp">
-      <p class="hint" id="fileHint">ছবিটি এই ব্রাউজারেই প্রিভিউ হবে; কোথাও আপলোড হবে না।</p>
+    <section class="panel">
+      <h2>🎬 Create Your Video</h2>
+
+      <label for="imageInput">আপনার ছবি নির্বাচন করুন</label>
+      <input id="imageInput" type="file" accept="image/*">
+      <img id="preview" alt="আপনার নির্বাচিত ছবির প্রিভিউ">
+
+      <label for="prompt">ভিডিও কেমন হবে লিখুন</label>
+      <textarea id="prompt" placeholder="যেমন: ছবির মানুষটি ধীরে ধীরে হাসবে..."></textarea>
+
+      <label for="duration">ভিডিওর দৈর্ঘ্য</label>
+      <select id="duration">
+        <option value="5">৫ সেকেন্ড</option>
+        <option value="10">১০ সেকেন্ড</option>
+      </select>
+
+      <button id="generateBtn">✨ Generate Video</button>
+      <p id="message">প্রথমে একটি ছবি আপলোড করুন।</p>
     </section>
 
-    <section class="card">
-      <label class="label" for="prompt">২. ভিডিওতে কী ঘটবে?</label>
-      <textarea class="field" id="prompt" maxlength="600" placeholder="যেমন: ক্যামেরা ধীরে ধীরে সামনে এগোবে, চুল বাতাসে উড়বে, পেছনে সূর্যাস্তের আলো..."></textarea>
-      <p class="hint">ছবিতে কী ধরনের নড়াচড়া চান, সহজ ভাষায় লিখুন।</p>
+    <section class="panel">
+      <h3>📌 দৈনিক ভিডিও সীমা</h3>
+      <p>সাধারণ ব্যবহারকারী: সর্বোচ্চ ৩টি</p>
+      <p>Owner: সর্বোচ্চ ১০টি</p>
+      <p class="small">এগুলো পরিকল্পিত সীমা। প্রকৃত ব্যবহার সার্ভার ও GPU কোটা যুক্ত হলে কার্যকর হবে।</p>
     </section>
 
-    <section class="card">
-      <span class="label">৩. ভিডিওর স্টাইল</span>
-      <div class="styles" id="styles">
-        <button class="style active" data-style="Cinematic"><b>🎬 Cinematic</b><span>মুভির মতো দৃশ্য</span></button>
-        <button class="style" data-style="Fantasy"><b>✨ Fantasy</b><span>স্বপ্নময় জগৎ</span></button>
-        <button class="style" data-style="Anime"><b>🌸 Anime</b><span>অ্যানিমে আবহ</span></button>
-        <button class="style" data-style="Smooth motion"><b>🌊 Smooth</b><span>মসৃণ নড়াচড়া</span></button>
-      </div>
-    </section>
-
-    <section class="card">
-      <div class="row">
-        <div><label class="label" for="duration">৪. সময়</label><select class="field" id="duration"><option value="5">৫ সেকেন্ড</option><option value="8" selected>৮ সেকেন্ড</option><option value="10">১০ সেকেন্ড</option></select></div>
-        <div><label class="label" for="ratio">ভিডিও অনুপাত</label><select class="field" id="ratio"><option value="9:16">9:16 · Portrait</option><option value="16:9">16:9 · Landscape</option><option value="1:1">1:1 · Square</option></select></div>
-      </div>
-    </section>
-
-    <button class="primary" id="generateBtn">✦ &nbsp; Generate AI Video</button>
-    <div class="notice" id="notice"><strong>ডিজাইন প্রস্তুত — AI ভিডিও ইঞ্জিন এখনো সংযুক্ত নয়।</strong><br>এই অ্যাপের ইন্টারফেস, ছবি প্রিভিউ ও সেটিংস কাজ করছে। সত্যিকারের ভিডিও তৈরি করতে একটি Image-to-Video API এবং নিরাপদ সার্ভার সংযোগ লাগবে। API key কখনো এই HTML ফাইলে বসাবেন না।</div>
+    <p class="small">DreamMotion AI © 2026</p>
   </main>
-  <p class="foot">DreamMotion AI · Create something wonderful<br>আপনার ছবি ও নির্দেশনা এই ডেমোতে ডিভাইসেই থাকে।</p>
-</div>
-<script>
-  const input=document.getElementById('imageInput'), drop=document.getElementById('dropArea'), content=document.getElementById('dropContent'), hint=document.getElementById('fileHint');
-  let imageUrl=null, selectedStyle='Cinematic';
-  input.addEventListener('change',()=>{
-    const file=input.files && input.files[0]; if(!file)return;
-    if(!file.type.startsWith('image/')){hint.textContent='দয়া করে একটি ছবি নির্বাচন করুন।';return;}
-    if(imageUrl)URL.revokeObjectURL(imageUrl); imageUrl=URL.createObjectURL(file);
-    drop.classList.add('has-image'); drop.innerHTML='<img alt="আপনার নির্বাচিত ছবির প্রিভিউ" src="'+imageUrl+'">';
-    hint.textContent=file.name+' · ছবি পরিবর্তন করতে আবার Choose image ব্যবহার করুন।';
-  });
-  document.querySelectorAll('.style').forEach(btn=>btn.addEventListener('click',()=>{
-    document.querySelectorAll('.style').forEach(b=>b.classList.remove('active'));btn.classList.add('active');selectedStyle=btn.dataset.style;
-  }));
-  document.getElementById('generateBtn').addEventListener('click',()=>{
-    const notice=document.getElementById('notice');notice.classList.add('show');
-    if(!input.files.length){notice.innerHTML='<strong>আগে একটি ছবি বেছে নিন।</strong><br>তারপর Generate AI Video চাপুন।';}
-    else {notice.innerHTML='<strong>আপনার সেটিংস প্রস্তুত!</strong><br>স্টাইল: '+selectedStyle+' · সময়: '+document.getElementById('duration').value+' সেকেন্ড · অনুপাত: '+document.getElementById('ratio').value+'।<br>সত্যিকারের ভিডিও তৈরি করতে এখনো Image-to-Video API ও নিরাপদ সার্ভার সংযোগ লাগবে।';}
-    notice.scrollIntoView({behavior:'smooth',block:'nearest'});
-  });
-  let installPrompt=null;const installBtn=document.getElementById('installBtn');
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;installBtn.classList.add('show');});
-  installBtn.addEventListener('click',async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installBtn.classList.remove('show');});
-  if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-</script>
+
+  <script>
+    const imageInput = document.getElementById("imageInput");
+    const preview = document.getElementById("preview");
+    const message = document.getElementById("message");
+    const generateBtn = document.getElementById("generateBtn");
+
+    imageInput.addEventListener("change", function () {
+      const file = this.files[0];
+
+      if (!file) {
+        preview.style.display = "none";
+        message.textContent = "প্রথমে একটি ছবি আপলোড করুন।";
+        return;
+      }
+
+      if (!file.type.startsWith("image/")) {
+        message.textContent = "অনুগ্রহ করে একটি ছবি নির্বাচন করুন।";
+        return;
+      }
+
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+      message.textContent = "ছবি আপলোড হয়েছে! এখন ভিডিও তৈরির জন্য প্রস্তুত।";
+    });
+
+    generateBtn.addEventListener("click", function () {
+      if (!imageInput.files[0]) {
+        message.textContent = "আগে একটি ছবি আপলোড করুন।";
+        return;
+      }
+
+      message.textContent =
+        "ছবি প্রস্তুত! ভিডিও জেনারেশন চালু করতে পরের ধাপে API যুক্ত করতে হবে।";
+    });
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").catch(console.error);
+    }
+  </script>
 </body>
-</html>
+        </html>
